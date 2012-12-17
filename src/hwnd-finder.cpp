@@ -69,10 +69,9 @@ static inline
 std::vector<std::string> &
 trim(std::vector<std::string> &container)
 {
-    std::transform(
+    std::for_each(
         container.begin(),
         container.end(),
-        container.begin(),
         std::ptr_fun<std::string &>(trim)
     );
     return container;
@@ -124,7 +123,7 @@ HwndFinder::find(const std::string &def)
     return hwnd;
 }
 
-#if 1
+#if DEBUG
 int main()
 {
     HwndFinder hf;
