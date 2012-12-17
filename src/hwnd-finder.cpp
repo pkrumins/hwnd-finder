@@ -11,7 +11,7 @@
 #define DEBUG 0
 
 static inline
-void
+std::vector<std::string> &
 split(
     const std::string &str,
     const char delim,
@@ -24,10 +24,12 @@ split(
     while (std::getline(ss, item, delim)) {
         container.push_back(item);
     }
+
+    return container;
 }
 
 static inline
-void
+std::string &
 ltrim(std::string &str)
 {
     str.erase(
@@ -38,10 +40,11 @@ ltrim(std::string &str)
             std::not1(std::ptr_fun<int, int>(std::isspace))
         )
     );
+    return str;
 }
 
 static inline
-void
+std::string &
 rtrim(std::string &str)
 {
     str.erase(
@@ -52,18 +55,18 @@ rtrim(std::string &str)
         ).base(),
         str.end()
     );
+    return str;
 }
 
 static inline
-void
+std::string &
 trim(std::string &str)
 {
-    rtrim(str);
-    ltrim(str);
+    return ltrim(rtrim(str));
 }
 
 static inline
-void
+std::vector<std::string> &
 trim(std::vector<std::string> &container)
 {
     for (std::vector<std::string>::iterator it = container.begin();
@@ -72,6 +75,7 @@ trim(std::vector<std::string> &container)
     {
         trim(*it);
     }
+    return container;
 }
 
 struct EnumData {
